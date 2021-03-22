@@ -1,0 +1,16 @@
+<!-- templates/about.html -->
+{% extends 'base.html' %}
+{% load blog_tags %}
+
+{% block content %}
+<h2>About</h2>
+<p class="text-muted">
+  <span class="fa fa-clock-o"></span>
+  Updated: {{ about.update }} &nbsp; 
+  <span class="fa fa-user"></span>
+  {{ about.author }} &nbsp;
+</p>
+<p>
+	{{ about.body|markdown|safe }}
+</p>
+{% endblock content %}

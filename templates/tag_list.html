@@ -1,0 +1,7 @@
+{% for tag in tag_list %}
+	<span class="badge badge-secondary">
+    <a href="{% url 'post_list_by_tag' tag.slug %}">
+			<span class="text-muted">{{ tag.name }}</span>
+		</a>
+  </span>
+{% endfor %}

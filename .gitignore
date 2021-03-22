@@ -1,0 +1,8 @@
+.vscode/
+db.sqlite3
+*.pyc
+*.swp
+*.swo
+media/*
+.env
+__pycache__/

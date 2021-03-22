@@ -1,0 +1,46 @@
+<!-- templates/home.html -->
+{% extends 'base.html' %}
+{% load blog_tags %}
+
+{% block content %}
+	<div class="col-12">
+		{% if tag and not search %}
+			<header class="page_header">
+			 	<h4 class="page_subtitle text-muted">Posts tagged with "{{ tag.name }}"</h2>
+			</header>
+		{% endif %}
+	</div>
+
+    {% for post in post_list %}
+			<div class="card shadow-sm border-1 col-12 mb-3">
+				<div class="card-body m-0 p-0 pt-3">
+					<h2 class="card-title h2 my-0 py-0">
+						<a href="{{ post.get_absolute_url }}">
+							{{ post.title }}
+						</a>
+					</h2>
+					<p class='card-text text-muted'>
+						<h6 class="text-muted">
+							{{ post.publish }}
+							<span class="ml-2 fa fa-tags" aria-hidden="true"></span> 
+
+							{% for tag in post.tags.all %}
+								<a href="{% url 'post_list_by_tag' tag.slug %}">
+									{{ tag.name }}
+								</a>
+								{% if not forloop.last %}, {% endif %}
+							{% endfor %}
+						</h6>
+					</p>
+					<p class="lead">
+							{{ post.introduction|safe }}
+					</p>
+					<p>
+						<a class="btn btn-primary btn-md" href="{{ post.get_absolute_url }}" role="button">Read more</a>
+					</p>
+				</div>
+			</div>     
+    {% endfor %}
+    {% include "pagination.html" %}
+{% endblock content %}
+

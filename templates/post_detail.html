@@ -1,0 +1,30 @@
+<!-- templates/post_detail.html -->
+{% extends 'base.html' %}
+{% load blog_tags %}
+
+{% block content %}
+  <div class="container">
+    <h2>{{ post.title }}</h2>
+    <p class="text-muted">
+			<span class="fa fa-clock-o"></span>
+			{{ post.publish }} &nbsp; 
+			<span class="fa fa-user"></span>
+			{{ post.author }} &nbsp;
+			{% for tag in post.tags.all %}
+				<a href="{% url 'post_list_by_tag' tag.slug %}">
+					<span class="badge badge-secondary text-muted">{{ tag.name }}</span>
+				</a>
+			{% endfor %}
+		</p>
+		<div>
+			<p>
+				{{ post.body|markdown|safe }}
+			</p>
+		</div>
+
+        
+  </div>
+  {% include 'comments/disqus.html' with url=request.build_absolute_uri identifier=post.slug %}
+
+{% endblock content %}
+
